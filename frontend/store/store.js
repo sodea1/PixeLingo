@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from '../reducers/root_reducer';
+import rootReducer from '../reducers/root_reducer';``
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
