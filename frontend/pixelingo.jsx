@@ -1,7 +1,7 @@
 import React from "react";
 import { store } from "./store/store";
 import * as ReactDOMClient from 'react-dom/client';
-import Test from "./components/test";
+import ImageGenerator from "./components/image_generator";
 import { getImage } from "./util/photo_api_util";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,5 +11,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const container = document.getElementById("root");
     const root = ReactDOMClient.createRoot(container);
-    root.render(<Test store={store} />);
+    root.render(<ImageGenerator store={store} />);
 });
