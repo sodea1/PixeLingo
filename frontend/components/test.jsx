@@ -2,18 +2,6 @@ import React from 'react';
 import { getImage } from '../util/photo_api_util';
 
 class Test extends React.Component {
-    // async getImage() {
-    //     let response;
-    //     await axios({
-    //         method: "GET",
-    //         url: `https://api.unsplash.com/photos/random/?client_id=${window.imageKey}`
-    //     }).then((res) => {
-    //         response = res.urls;
-    //     });
-    //     debugger
-    //     return response;
-    // }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +10,6 @@ class Test extends React.Component {
     }
 
     componentDidMount() {
-        debugger
         getImage().then((res) => {
             this.setState({ imageUrl: res});
         });
@@ -31,7 +18,7 @@ class Test extends React.Component {
     render() {
         return (
             <div>
-                {this.state.imageUrl && <img src={this.state.imageUrl} />}
+                {this.state.imageUrl && <img src={this.state.imageUrl + "&w=600"} />}
             </div>
         )
     }
