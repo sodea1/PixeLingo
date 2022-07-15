@@ -7,6 +7,5 @@ export const getImage = (topic) => {
             params: {
                 query: topic
             }
-            // add ability to query by search input
         }).then(res => res.data.urls.raw);
 };

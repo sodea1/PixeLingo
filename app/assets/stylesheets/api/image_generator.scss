@@ -1,0 +1,21 @@
+.image-container {
+    display: inline-block;
+    position: relative;
+}
+
+.image {
+    position: relative;
+}
+
+.marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: orange;
+    font-weight: 700;
+    font-size: 22px;
+}
