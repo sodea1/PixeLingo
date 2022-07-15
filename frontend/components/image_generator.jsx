@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getImage } from '../util/image_api_util';
-import ImageMarker, { Marker } from 'react-image-marker';
+// import ImageMarker, { Marker } from 'react-image-marker';
 
 const ImageGenerator = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [topic, setTopic] = useState("");
-    const [markers, setMarkers] = useState([]);
 
     // useEffect(() => {
     //     getImage().then((res) => {
@@ -20,18 +19,16 @@ const ImageGenerator = () => {
         });
     };
 
-    const renderImgMarkers = (path, markers) => {
-        <ImageMarker
-            src={path}
-            markers={markers}
-            // onAddMarker={}
-        />
-    }
-
     const addMarkers = (e) => {
         e.preventDefault();
         debugger
-        setMarkers([...existing])
+        const trueX = e.pageX - window.pageXOffset;
+        const trueY = e.pageY - window.pageYOffset;
+
+        const left = Math.floor((trueX / e.target.naturalWidth) * 100);
+        const top = Math.floor((trueY / e.target.naturalHeight) * 100);
+
+        return         
     };
 
     return (
@@ -41,7 +38,6 @@ const ImageGenerator = () => {
                 <input type="submit" value="Get a Photo" />
             </form>
             {imageUrl && <img src={imageUrl + "&h=700"} onClick={addMarkers} />}
-            
         </div>
     );
 };
