@@ -29,22 +29,6 @@ const ImageGenerator = () => {
         addMarker([ ...markers, newMarker ]);
     };
 
-    const generateEntries = (size) => {
-        let entries = [];
-        while (size > 0) {
-            entries.push(
-                <div className='translation-entry' key={size}>
-                    <span>{size + 1}</span>
-                    <input className='from-lang' type="text" />
-                    <input className='to-lang' type="text" />
-                </div>
-            );
-            size -= 1;
-        };
-        debugger
-        return entries;
-    };
-
     return (
         <div className='image-gen-container'>
             <div className='image-flex-wrapper'>
