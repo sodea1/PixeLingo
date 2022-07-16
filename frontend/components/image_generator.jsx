@@ -4,7 +4,7 @@ import { getImage } from '../util/image_api_util';
 const ImageGenerator = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [topic, setTopic] = useState("");
-    const [markers, addMarker] = useState([]);
+    const [markers, setMarkers] = useState([]);
     const entries = Array.from(Array(markers.length).keys());
 
     const fetchImage = (e) => {
@@ -14,7 +14,7 @@ const ImageGenerator = () => {
         });
     };
 
-    const addMarkers = (e) => {
+    const setMarkerss = (e) => {
         e.preventDefault();
 
         const trueX = e.pageX - window.pageXOffset;
@@ -24,10 +24,47 @@ const ImageGenerator = () => {
         const left = Math.floor(((trueX - parent.offsetLeft - 8) / e.target.naturalWidth) * 100);
         const top = Math.floor(((trueY - parent.offsetTop - 8) / e.target.naturalHeight) * 100);
 
-        const newMarker = { top: top, left: left, src: imageUrl, hint: "" };
-        debugger
-        addMarker([ ...markers, newMarker ]);
+        const newMarker = { 
+            top: top, 
+            left: left, 
+            src: imageUrl, 
+            fromText: "",
+            toText: "",
+            hint: "",
+        };
+
+        setMarkers([ ...markers, newMarker ]);
     };
+
+    const updateFromText = (e) => {
+        e.preventDefault();
+
+        const text = e.target.value;
+        const newState = markers.map((marker, i) => {
+            if (i === parseInt(e.target.dataset.idx)) {
+                return {...marker, fromText: text};
+            }
+
+            return marker;
+        });
+
+        setMarkers(newState);
+    };
+
+    const updateToText = (e) => {
+        e.preventDefault();
+        const text = e.target.value;
+        const newState = markers.map((marker, i) => {
+            if (i === parseInt(e.target.dataset.idx)) {
+                return { ...marker, toText: text };
+            }
+            
+            return marker;
+        });
+
+        setMarkers(newState);
+    };
+
 
     return (
         <div className='image-gen-container'>
@@ -39,7 +76,7 @@ const ImageGenerator = () => {
 
                 {imageUrl && 
                 <div className='image-container'>
-                    <img className='image' src={imageUrl + "&h=700"} onClick={addMarkers} />
+                    <img className='image' src={imageUrl + "&h=700"} onClick={setMarkerss} />
                     {markers && markers.map((marker, i) => {
                         return <div className='marker' style={{ top: marker.top + "%", left: marker.left + "%" }} key={i}>{i + 1}</div>
                     })}
@@ -58,8 +95,8 @@ const ImageGenerator = () => {
                         return (
                             <div className='translation-entry' key={key}>
                                 <span>{key + 1}</span>
-                                <input className='from-lang' type="text" />
-                                <input className='to-lang' type="text" />
+                                <input onChange={updateFromText} className='fromText' type="text" value={markers[key].fromText} data-idx={key} />
+                                <input onChange={updateToText} className='toText' type="text" value={markers[key].toText} data-idx={key} />
                             </div>
                         );
                     })}
