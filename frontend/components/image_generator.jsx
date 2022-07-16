@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getImage } from '../util/image_api_util';
-// import ImageMarker, { Marker } from 'react-image-marker';
 
 const ImageGenerator = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [topic, setTopic] = useState("");
     const [markers, addMarker] = useState([]);
-    // const [lastMarkerIdx, setLastMarkerIdx] = useState(-1);
-
-    // useEffect(() => {
-    //     getImage().then((res) => {
-    //         setImageUrl(res);
-    //     });
-    // }, []);
+    const entries = Array.from(Array(markers.length).keys());
 
     const fetchImage = (e) => {
         e.preventDefault();
@@ -28,41 +21,74 @@ const ImageGenerator = () => {
         const trueY = e.pageY - window.pageYOffset;
         const parent = e.target.offsetParent;
 
-        const left = Math.floor(((trueX - parent.offsetLeft - 4) / e.target.naturalWidth) * 100);
-        const top = Math.floor(((trueY - parent.offsetTop - 4) / e.target.naturalHeight) * 100);
+        const left = Math.floor(((trueX - parent.offsetLeft - 8) / e.target.naturalWidth) * 100);
+        const top = Math.floor(((trueY - parent.offsetTop - 8) / e.target.naturalHeight) * 100);
 
-        const newMarker = { top: top, left: left, src: imageUrl, hint: "" }; 
+        const newMarker = { top: top, left: left, src: imageUrl, hint: "" };
+        debugger
         addMarker([ ...markers, newMarker ]);
-        // setLastMarkerIdx(lastMarkerIdx += 1);
     };
 
-    const assignHint = (e) => {
-
+    const generateEntries = (size) => {
+        let entries = [];
+        while (size > 0) {
+            entries.push(
+                <div className='translation-entry' key={size}>
+                    <span>{size + 1}</span>
+                    <input className='from-lang' type="text" />
+                    <input className='to-lang' type="text" />
+                </div>
+            );
+            size -= 1;
+        };
+        debugger
+        return entries;
     };
 
     return (
-        <div>
-            <form onSubmit={fetchImage}>
-                <input type="text" value={topic} onChange={e => setTopic(e.target.value)}/>
-                <input className='get-photo' type="submit" value="Get a Photo" />
-            </form>
+        <div className='image-gen-container'>
+            <div className='image-flex-wrapper'>
+                <form onSubmit={fetchImage}>
+                    <input type="text" value={topic} onChange={e => setTopic(e.target.value)}/>
+                    <input className='get-photo' type="submit" value="Get a Photo" />
+                </form>
 
-            {imageUrl && 
-            <div className='image-container'>
-                <img className='image' src={imageUrl + "&h=700"} onClick={addMarkers} />
-                {markers && markers.map((marker, i) => {
-                    return <div onMouseOver={assignHint} className='marker' style={{ top: marker.top + "%", left: marker.left + "%" }} key={i}>{i + 1}</div>
-                })}
+                {imageUrl && 
+                <div className='image-container'>
+                    <img className='image' src={imageUrl + "&h=700"} onClick={addMarkers} />
+                    {markers && markers.map((marker, i) => {
+                        return <div className='marker' style={{ top: marker.top + "%", left: marker.left + "%" }} key={i}>{i + 1}</div>
+                    })}
+                </div>
+                }
             </div>
-            }
 
+            <div className='translation-wrapper'>
+                <div className='pick-langs'>
+                    <h1>From: English</h1>
+                    <h1>To: French</h1>
+                </div>
+
+                <form className='translation-form'>
+                    {entries.map(key => {
+                        return (
+                            <div className='translation-entry' key={key}>
+                                <span>{key + 1}</span>
+                                <input className='from-lang' type="text" />
+                                <input className='to-lang' type="text" />
+                            </div>
+                        );
+                    })}
+                </form>
+            </div>
         </div>
     );
 };
 
 export default ImageGenerator;
 
-let arr = [{ top: 1, left: 2, src: "hi" }, { top: 8, left: 2, src: "yea" }]
+
+///////////////////////////////////////////////////
 
 // class ImageGenerator extends React.Component {
 //     constructor(props) {
