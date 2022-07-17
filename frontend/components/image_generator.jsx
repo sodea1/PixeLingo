@@ -100,8 +100,8 @@ const ImageGenerator = () => {
         const marker = markers[e.target.dataset.idx];
         const from = marker.fromText;
         const to = marker.toText;
-        const top = marker.top + 2;
-        const left = marker.left;
+        const top = marker.top - 4;
+        const left = marker.left - 2;
         const popup = document.getElementsByClassName("marker-popup")[0];
 
         document.getElementById("from").innerHTML = from;
