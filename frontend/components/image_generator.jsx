@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getImage } from '../util/image_api_util';
+import { translate } from '../util/translation_api_util';
 
 const ImageGenerator = () => {
     const [imageUrl, setImageUrl] = useState("");
@@ -14,7 +15,7 @@ const ImageGenerator = () => {
         });
     };
 
-    const setMarkerss = (e) => {
+    const setMarkerState = (e) => {
         e.preventDefault();
 
         const trueX = e.pageX - window.pageXOffset;
@@ -24,7 +25,7 @@ const ImageGenerator = () => {
         const left = Math.floor(((trueX - parent.offsetLeft - 8) / e.target.naturalWidth) * 100);
         const top = Math.floor(((trueY - parent.offsetTop - 8) / e.target.naturalHeight) * 100);
 
-        const newMarker = { 
+        const newMarker = {
             top: top, 
             left: left, 
             src: imageUrl, 
@@ -65,6 +66,33 @@ const ImageGenerator = () => {
         setMarkers(newState);
     };
 
+    // requests translation api and returns string of text values separated by commas
+    const fetchTranslation = async () => {
+        let words = [];
+        const allEntries = document.getElementsByClassName("fromText");
+        // BE SURE TO CHANGE TARGET LANGUAGE 
+        const targetLang = "fr";
+        const size = allEntries.length;
+
+        for (let i = 0; i < size; i++) {
+            words.push(allEntries[i].value)
+        };
+
+        const reqString = words.join(", ");
+        const resString = await translate(targetLang, reqString);
+        return assignTranslatedText(resString, size);
+    };
+
+    // assigns state toText value for each marker
+    const assignTranslatedText = (str, size) => {
+        const wordsArr = str.split(", ");
+        const newState = markers.map((marker, i) => {
+            if (i > size) throw "number of entries exceeded";
+            return {...marker, toText: wordsArr[i]};
+        });
+
+        setMarkers(newState);
+    };
 
     return (
         <div className='image-gen-container'>
@@ -76,7 +104,7 @@ const ImageGenerator = () => {
 
                 {imageUrl && 
                 <div className='image-container'>
-                    <img className='image' src={imageUrl + "&h=700"} onClick={setMarkerss} />
+                    <img className='image' src={imageUrl + "&h=600&w=600"} onClick={setMarkerState} />
                     {markers && markers.map((marker, i) => {
                         return <div className='marker' style={{ top: marker.top + "%", left: marker.left + "%" }} key={i}>{i + 1}</div>
                     })}
@@ -101,6 +129,7 @@ const ImageGenerator = () => {
                         );
                     })}
                 </form>
+                <button onClick={fetchTranslation}>Translate</button>
             </div>
         </div>
     );
