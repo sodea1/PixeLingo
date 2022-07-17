@@ -28,3 +28,17 @@
         cursor: pointer;
     }
 }
+
+.marker-popup {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: -10px;
+    border: 1px solid #444;
+    background-color: antiquewhite;
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}

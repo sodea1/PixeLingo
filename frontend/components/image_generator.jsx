@@ -94,6 +94,29 @@ const ImageGenerator = () => {
         setMarkers(newState);
     };
 
+    const hoverDetails = (e) => {
+        e.preventDefault();
+        console.log(e);
+        const marker = markers[e.target.dataset.idx];
+        const from = marker.fromText;
+        const to = marker.toText;
+        const top = marker.top + 2;
+        const left = marker.left;
+        const popup = document.getElementsByClassName("marker-popup")[0];
+
+        document.getElementById("from").innerHTML = from;
+        document.getElementById("to").innerHTML = to;
+        popup.classList.remove('hidden');
+        popup.style.top = top + "%";
+        popup.style.left = left + "%";
+    };
+
+    const hideDetails = (e) => {
+        e.preventDefault();
+        const popup = document.getElementsByClassName("marker-popup")[0];
+        popup.classList.add('hidden');
+    };
+
     return (
         <div className='image-gen-container'>
             <div className='image-flex-wrapper'>
@@ -106,8 +129,21 @@ const ImageGenerator = () => {
                 <div className='image-container'>
                     <img className='image' src={imageUrl + "&h=600&w=600"} onClick={setMarkerState} />
                     {markers && markers.map((marker, i) => {
-                        return <div className='marker' style={{ top: marker.top + "%", left: marker.left + "%" }} key={i}>{i + 1}</div>
+                        return (
+                            <div onMouseOver={hoverDetails} 
+                                onMouseOut={hideDetails}
+                                className='marker' 
+                                style={{ top: marker.top + "%", left: marker.left + "%" }} 
+                                key={i}
+                                data-idx={i}>
+                                {i + 1}
+                            </div>
+                        )
                     })}
+                    <div className='marker-popup hidden'>
+                        <span id='to'></span>
+                        <span id='from'></span>
+                    </div>
                 </div>
                 }
             </div>
@@ -123,8 +159,14 @@ const ImageGenerator = () => {
                         return (
                             <div className='translation-entry' key={key}>
                                 <span>{key + 1}</span>
-                                <input onChange={updateFromText} className='fromText' type="text" value={markers[key].fromText} data-idx={key} />
-                                <input onChange={updateToText} className='toText' type="text" value={markers[key].toText} data-idx={key} />
+                                <input onChange={updateFromText}
+                                    className='fromText' 
+                                    type="text" 
+                                    value={markers[key].fromText} data-idx={key} />
+                                <input onChange={updateToText} 
+                                    className='toText' 
+                                    type="text" 
+                                    value={markers[key].toText} data-idx={key} />
                             </div>
                         );
                     })}
