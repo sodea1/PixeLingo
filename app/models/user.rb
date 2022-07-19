@@ -22,6 +22,6 @@ class User < ApplicationRecord
     end
 
     def generate_session_token
-
+        
     end
 end
