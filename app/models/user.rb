@@ -19,9 +19,24 @@ class User < ApplicationRecord
 
     def is_password?(password)
         pass_obj = BCrypt::Password.new(self.password_digest)
+        pass_obj.is_password?(password)
+    end
+
+    def password=(password)
+        self.password_digest = BCrypt::Password.create(password)
+    end
+
+    def reset_session_token!
+        self.session_token = generate_session_token
+        self.save!
+        self.session_token
     end
 
     def generate_session_token
-        
+        SecureRandom.base64(64)
+    end
+
+    def ensure_session_token
+        self.session_token ||= generate_session_token
     end
 end
