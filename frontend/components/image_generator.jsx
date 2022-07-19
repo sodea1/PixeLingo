@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getImage } from '../util/image_api_util';
 import { translate } from '../util/translation_api_util';
 
