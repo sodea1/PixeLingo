@@ -9,6 +9,7 @@ class Api::SessionsController < ApplicationController
     end
 
     def destroy
-        current_user.logout
+        logout
+        render json: ['Logout successful']
     end
 end

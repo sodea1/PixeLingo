@@ -6,7 +6,7 @@ class User < ApplicationRecord
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
     attr_reader :password
-    after_intitialize :ensure_session_token
+    after_initialize :ensure_session_token
 
     def self.find_by_credentials(email, password)
         @user = User.find_by(email: email)
