@@ -13,5 +13,13 @@ export const signup = (user) => {
         method: "POST",
         url: '/api/users',
         data: { user }
-    })
-}
+    });
+};
+
+export const logout = (user) => {
+    return axios({
+        method: 'DELETE',
+        url: '/api/session',
+        data: { user }
+    });
+};
