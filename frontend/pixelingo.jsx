@@ -5,6 +5,7 @@ import ImageGenerator from "./components/image_generator";
 import { getImage } from "./util/image_api_util";
 import { translate } from "./util/translation_api_util";
 import { logout, login, signup } from "./actions/session_actions";
+import Root from "./components/root";
 
 document.addEventListener("DOMContentLoaded", () => {
     window.getState = store.getState;
@@ -17,5 +18,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const container = document.getElementById("root");
     const root = ReactDOMClient.createRoot(container);
-    root.render(<ImageGenerator store={store} />);
+    root.render(<Root store={store} />);
 });
