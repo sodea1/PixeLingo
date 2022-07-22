@@ -4,7 +4,7 @@ import * as ReactDOMClient from 'react-dom/client';
 import ImageGenerator from "./components/image_generator";
 import { getImage } from "./util/image_api_util";
 import { translate } from "./util/translation_api_util";
-import { login, signup } from "./util/session_api_util";
+import { logout, login, signup } from "./actions/session_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
     window.getState = store.getState;
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.translate = translate;
     window.login = login;
     window.signup = signup;
+    window.logout = logout;
 
     const container = document.getElementById("root");
     const root = ReactDOMClient.createRoot(container);

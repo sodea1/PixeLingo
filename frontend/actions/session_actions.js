@@ -12,6 +12,7 @@ const createUser = (user) => {
 };
 
 const loginUser = (user) => {
+    debugger
     return ({
         type: LOGIN_USER,
         user
@@ -31,6 +32,7 @@ export const signup = user => dispatch => {
 };
 
 export const login = user => dispatch => {
+    debugger
     return SessionApiUtil.login(user)
         .then(res => dispatch(loginUser(res)));
 };

@@ -8,6 +8,8 @@ const reducer = rootReducer;
 
 export const store = configureStore({   
     reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger).concat(thunk)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    }).concat(logger).concat(thunk)
 });
 
