@@ -6,10 +6,9 @@ const sessionReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGIN_USER:
             newState = Object.assign({currUserId: action.user.data.id});
-            debugger
             return newState;
         case LOGOUT_USER:
-            return {};
+            return {currUserId: null};
         default:
             return state;
     }

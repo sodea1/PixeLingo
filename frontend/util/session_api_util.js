@@ -16,10 +16,9 @@ export const signup = (user) => {
     });
 };
 
-export const logout = (user) => {
+export const logout = () => {
     return axios({
         method: 'DELETE',
         url: '/api/session',
-        data: { user }
     });
 };
