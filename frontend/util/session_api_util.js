@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const login = (user) => {
+export const login = (user) => {    
     return axios({
         method: 'POST',
         url: '/api/session',
