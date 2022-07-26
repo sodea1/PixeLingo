@@ -7,28 +7,17 @@
     // overflow-y: hidden;
 }
 
-.waterfall-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    row-gap: 6px;
-    column-gap: 6px;
-}
 
 .test1 {
-    position: absolute;
-    top: 0;
-    left: 0;
+    // position: absolute;
 }
 
 .title {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     font-family: "lato";
     font-size: 4em;
     z-index: 1; 
     background-color: white;
+    margin: auto;
 }
 
 .animate {
