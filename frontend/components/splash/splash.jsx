@@ -21,23 +21,32 @@ const Splash = () => {
     //         });
     // }, []);
 
+    const animate = () => {
+        setInterval(() => {
+            const image = document.getElementById("test1");
+            let height = image.offsetTop;
+            const maxHeight = window.innerHeight;
+            // let w = image.offsetLeft;
+            // const maxWidth = window.innerWidth;
+            let newHeight = height + 2;
+            image.style.top = String(newHeight) + "px";
+        }, 10)
+    }
+
     useEffect(() => {
-        const image = document.getElementById("test");
-        // debugger
-    }, [])
+        animate()
+    }, [isLoaded])
     
     return (
         <div className='splash-container'>
+            <img id='test1' src='https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=200&fit=max' />
+            <img id='test2' src='https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=200&fit=max' />
             <div className='title'>PixeLingo</div>
                 {/* {isLoaded && images.map((url, i) => {
                     return (
                         <img src="" key={i} />
                     )
                 })} */}
-            <div className='waterfall'>
-                <img id='test' src='https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max' />
-                <img id='test' src='https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max' />
-            </div>
         </div>
     )
 };
