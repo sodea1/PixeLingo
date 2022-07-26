@@ -8,8 +8,8 @@ const App = () => (
         {/* <ImageGenerator /> */}
         <Routes>
             <Route path="/" element={<Splash />}>
-                <Route path="images" element={<ImageGenerator />}/>
             </Route>
+            <Route path="/images" element={<ImageGenerator />}/>
         </Routes>
     </div>
 );
