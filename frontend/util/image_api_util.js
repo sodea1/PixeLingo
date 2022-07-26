@@ -13,7 +13,7 @@ export const getImage = (topic) => {
 export const getCollection = (topic, count = 30) => {
     return axios({
         method: "GET",
-        url: `https://api.unsplash.com/photos/random/?client_id=${imageKey}&orientation=squarish`,
+        url: `https://api.unsplash.com/photos/random/?client_id=${imageKey}`,
         params: {
             query: topic,
             count: count
