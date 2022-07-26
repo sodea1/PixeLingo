@@ -1,13 +1,13 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ImageGenerator from "./image_generator";
 
 const App = () => (
     <div>
-        <ImageGenerator />
-        {/* <Switch> */}
-            {/* <Route path="/images" /> */}
-        {/* </Switch> */}
+        {/* <ImageGenerator /> */}
+        <Routes>
+            <Route path="/" element={<ImageGenerator />} />
+        </Routes>
     </div>
 );
 
