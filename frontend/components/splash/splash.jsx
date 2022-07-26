@@ -7,28 +7,36 @@ const Splash = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [images, setImages] = useState([]);
     const [error, setError] = useState(null);
+
+    // useEffect(() => {
+    //     const topic = Helpers.getTopic();
+    //     getCollection(topic)
+    //         .then((res) => res.data)
+    //         .then((res) => {
+    //             const urls = res.map(obj => obj.urls.small)
+    //             setImages(urls)
+    //             setIsLoaded(true)
+    //         }, (error) =>{
+    //             setError(error)
+    //         });
+    // }, []);
+
     useEffect(() => {
-        const topic = Helpers.getTopic();
-        getCollection(topic)
-            .then((res) => res.data)
-            .then((res) => {
-                setImages(res)
-                setIsLoaded(true)
-            }, (error) =>{
-                setError(error)
-            });
-    }, []);
+        const image = document.getElementById("test");
+        // debugger
+    }, [])
     
     return (
-        <div className='title'>
-            PixeLingo
-            <div>
-                {images.map((obj, i) => {
-                    const url = obj.urls.small
+        <div className='splash-container'>
+            <div className='title'>PixeLingo</div>
+                {/* {isLoaded && images.map((url, i) => {
                     return (
-                        <img src={url} key={i} />
+                        <img src="" key={i} />
                     )
-                })}
+                })} */}
+            <div className='waterfall'>
+                <img id='test' src='https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max' />
+                <img id='test' src='https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=400&fit=max' />
             </div>
         </div>
     )

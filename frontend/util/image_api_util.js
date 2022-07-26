@@ -6,7 +6,6 @@ export const getImage = (topic) => {
             url: `https://api.unsplash.com/photos/random/?client_id=${imageKey}&orientation=squarish`,
             params: {
                 query: topic,
-                count: count
             }
         }).then(res => res.data.urls.raw);
 };
