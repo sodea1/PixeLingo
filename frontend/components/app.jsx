@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ImageGenerator from "./image_generator";
-import Splash from "./splash";
+import Splash from "./splash/splash";
 
 const App = () => (
     <div>
